@@ -1,59 +1,67 @@
-// widget dasar untuk membangun ui flutter
-import 'package:flutter/material.dart';
-import '../model/poli.dart';
-import 'poli_detail.dart';
+import 'package:flutter/material.dart'; // Mengimpor pustaka 'flutter/material.dart' yang diperlukan untuk mengembangkan aplikasi Flutter.
+import '../model/poli.dart'; // Mengimpor file 'poli.dart' dari lokasi yang sesuai.
+import 'poli_detail.dart'; // Mengimpor file 'poli_detail.dart' dari lokasi yang sesuai.
+import 'poli_item.dart'; // Mengimpor file 'poli_item.dart' dari lokasi yang sesuai.
+import 'poli_form.dart'; // Mengimpor file 'poli_form.dart' dari lokasi yang sesuai.
 
-// Mendefinisikan kelas PoliPage yang merupakan StatefulWidget. StatefulWidget digunakan ketika sebuah widget dapat berubah dalam keadaan (state) selama waktu tertentu
 class PoliPage extends StatefulWidget {
-  // Konstruktor untuk kelas PoliPage yang menerima parameter key (opsional). Dalam konstruktor ini, digunakan super(key: key) untuk meneruskan parameter key ke konstruktor kelas induk
-  const PoliPage({Key? key}) : super(key: key);
-// Meng-override/menimpa metode createState() yang mengembalikan objek _PoliPageState. Metode ini bertanggung jawab untuk membuat dan menginisialisasi state dari widget PoliPage.
+  // Mendefinisikan kelas 'PoliPage' yang merupakan 'StatefulWidget'.
+  const PoliPage({Key? key})
+      : super(
+            key:
+                key); // Membuat konstruktor untuk kelas 'PoliPage' dengan parameter opsional 'key'.
+
   @override
-  State<PoliPage> createState() => _PoliPageState();
+  State<PoliPage> createState() =>
+      _PoliPageState(); // Mengimplementasikan metode 'createState' yang mengembalikan instance dari '_PoliPageState'.
 }
 
 class _PoliPageState extends State<PoliPage> {
-  // Meng-override metode build() untuk membangun tampilan UI dari widget _PoliPageState. Metode ini mengembalikan widget Scaffold sebagai kontainer utama
+  // Mendefinisikan kelas '_PoliPageState' yang merupakan 'State' dari 'PoliPage'.
   @override
   Widget build(BuildContext context) {
+    // Mengimplementasikan metode 'build' yang mengembalikan tampilan widget yang akan ditampilkan.
     return Scaffold(
-      // Membuat AppBar dengan judul "Data Poli" menggunakan widget AppBar
-      appBar: AppBar(title: const Text("Data Poli")),
-      // Membuat ListView sebagai kontainer untuk daftar elemen-elemen poli
-      body: ListView(
-        children: [
-          // Membungkus Card dengan GestureDetector untuk menambahkan fungsi onTap saat card ditekan. Card ini mewakili poli anak. Ketika card ini ditekan, akan dibuat objek poliAnak dengan nama poli "Poli Anak" menggunakan kelas Poli. Selanjutnya, menggunakan Navigator, kita akan berpindah ke halaman PoliDetail dengan membawa objek poliAnak sebagai parameter
+      // Menggunakan 'Scaffold' sebagai kerangka dasar aplikasi.
+      appBar: AppBar(
+        // Menampilkan AppBar pada tampilan.
+        title: const Text(
+            "Data Poli"), // Menampilkan teks "Data Poli" sebagai judul AppBar.
+        actions: [
+          // Menampilkan aksi pada AppBar.
           GestureDetector(
-            // Membuat Card dengan ListTile untuk mewakili beberapa poli lainnya seperti "Poli Kandungan", "Poli Gigi", dan "Poli THT". Namun, belum ada logika onTap yang ditambahkan untuk poli-polinya
-            child: Card(
-              child: ListTile(
-                title: const Text("Poli Anak"),
-              ),
-            ),
+            // Menggunakan GestureDetector untuk menangani aksi ketika icon ditap.
+            child: const Icon(Icons.add), // Menampilkan ikon 'add' pada AppBar.
             onTap: () {
-              Poli poliAnak = Poli(namaPoli: "Poli Anak");
+              // Menambahkan fungsi yang akan dijalankan ketika ikon ditap.
               Navigator.push(
+                // Menggunakan Navigator untuk berpindah ke halaman 'PoliForm'.
                 context,
-                MaterialPageRoute(
-                    builder: (context) => PoliDetail(poli: poliAnak)),
+                MaterialPageRoute(builder: (context) => PoliForm()),
               );
             },
           ),
-          Card(
-            child: ListTile(
-              title: const Text("Poli Kandungan"),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: const Text("Poli Gigi"),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: const Text("Poli THT"),
-            ),
-          ),
+        ],
+      ),
+      body: ListView(
+        // Menggunakan ListView sebagai kontainer untuk menampilkan daftar item.
+        children: [
+          PoliItem(
+              poli: Poli(
+                  namaPoli:
+                      "Poli Anak")), // Menampilkan item PoliItem dengan data poli "Poli Anak".
+          PoliItem(
+              poli: Poli(
+                  namaPoli:
+                      "Poli Kandungan")), // Menampilkan item PoliItem dengan data poli "Poli Kandungan".
+          PoliItem(
+              poli: Poli(
+                  namaPoli:
+                      "Poli Gigi")), // Menampilkan item PoliItem dengan data poli "Poli Gigi".
+          PoliItem(
+              poli: Poli(
+                  namaPoli:
+                      "Poli THT")), // Menampilkan item PoliItem dengan data poli "Poli THT".
         ],
       ),
     );
