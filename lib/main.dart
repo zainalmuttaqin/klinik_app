@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import '/ui/poli_page.dart';
+import 'ui/beranda.dart';
 
-// Fungsi main() adalah titik masuk utama untuk aplikasi Flutter. Di sini, kita menjalankan aplikasi dengan memanggil runApp() dan memberikan instance dari MyApp sebagai parameter
-void main() => runApp(MyApp());
+// Fungsi main yang merupakan entry point program
+void main() {
+  // Menjalankan aplikasi Flutter
+  runApp(const MyApp());
+}
 
-// Mendefinisikan kelas MyApp yang merupakan StatelessWidget. StatelessWidget digunakan ketika sebuah widget tidak berubah dalam keadaan (state) selama waktu tertentu
+// Kelas MyApp yang merupakan StatelessWidget
 class MyApp extends StatelessWidget {
-  // Meng-override/menimpa metode build() untuk membangun tampilan UI dari widget MyApp. Metode ini mengembalikan MaterialApp sebagai kontainer utama
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    //  Membuat instance dari MaterialApp yang digunakan untuk mengatur konfigurasi aplikasi Flutter
-    return MaterialApp(
-      // judul aplikasi
-      title: 'Klinik APP',
-      // Mengatur debugShowCheckedModeBanner menjadi false untuk menyembunyikan banner debug di sudut kanan atas aplikasi
+    // Mengembalikan MaterialApp dengan beberapa konfigurasi
+    return const MaterialApp(
+      // Menyembunyikan banner DEBUG
       debugShowCheckedModeBanner: false,
-      // Menentukan halaman awal aplikasi dengan menggunakan instance dari PoliPage sebagai nilai home
-      home: PoliPage(),
-      // Mengembalikan MaterialApp sebagai hasil dari metode build()
+      // Judul aplikasi
+      title: 'Klinik',
+      // Mengatur halaman awal aplikasi
+      home: Beranda(),
     );
   }
 }
